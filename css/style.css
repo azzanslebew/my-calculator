@@ -1,0 +1,1045 @@
+/* --- 1. Preloader Styling --- */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: radial-gradient(ellipse at center, #f5f7fa 0%, #e8edf3 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    transition: opacity 0.75s ease, visibility 0.75s ease;
+    visibility: visible;
+    opacity: 1;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-shape {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    animation: spin-and-morph 3s infinite ease-in-out;
+}
+
+#preloader p {
+    font-family: "Exo", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #4B5563;
+    animation: pulse-text 2s infinite ease-in-out;
+}
+
+
+/* --- 2. General & Body Styling --- */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Exo", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f9fafb;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+/* --- 3. Header Section --- */
+.site-header {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(ellipse at center, #f5f7fa 0%, #e8edf3 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Header Content */
+.header-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 20px;
+    animation: fadeIn 1.5s 0.5s ease-in-out backwards, textFloat 6s 2s ease-in-out infinite alternate;
+}
+
+.header-content h1 {
+    font-size: 3.5rem;
+    color: #1F2937;
+    margin-bottom: 16px;
+    text-shadow: 0px 4px 20px rgba(224, 232, 240, 0.8);
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.header-content p {
+    font-size: 1.125rem;
+    color: #4B5563;
+    line-height: 1.6;
+}
+
+/* Scroll Down Button */
+.scroll-down-btn {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    width: 60px;
+    height: 60px;
+    border: 2px solid #b8c5d6;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    animation: bounce 2.5s infinite ease-in-out;
+}
+
+.scroll-down-btn svg {
+    width: 30px;
+    height: 30px;
+    color: #4b5563;
+    transition: color 0.3s;
+}
+
+.scroll-down-btn:hover {
+    background-color: #ffffff;
+    border-color: #4b5563;
+    animation-play-state: paused;
+}
+
+.scroll-down-btn:hover svg {
+    color: #1f2937;
+}
+
+/* Animated Shapes */
+.shapes-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.shape {
+    position: absolute;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    opacity: 0;
+    --tx: 0;
+    --ty: 0;
+    animation-name: shape-arrive, floating, rotating;
+    animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1), ease-in-out, linear;
+    animation-iteration-count: 1, infinite, infinite;
+    animation-fill-mode: forwards;
+    animation-direction: normal, alternate, normal;
+}
+
+.shape-circle {
+    border-radius: 50%;
+}
+
+.shape-rectangle {
+    border-radius: 10%;
+}
+
+.shape-rhombus {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    border-radius: 0;
+}
+
+.shape-triangle {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    border-radius: 0;
+}
+
+.shape-triangle-down {
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+    border-radius: 0;
+}
+
+/* Animation Durations & Delays: 1. Arrive, 2. Floating, 3. Rotating */
+.shape-1 {
+    width: 80px;
+    height: 80px;
+    top: 10%;
+    left: 8%;
+    animation-duration: 0.8s, 8s, 25s;
+    animation-delay: 0.4s, 1.2s, 0s;
+    --ty: -50px;
+}
+
+.shape-2 {
+    width: 50px;
+    height: 50px;
+    top: 15%;
+    right: 10%;
+    animation-duration: 0.7s, 7s, 15s;
+    animation-delay: 0.6s, 1.3s, 0s;
+    --tx: 50px;
+}
+
+.shape-3 {
+    width: 100px;
+    height: 100px;
+    bottom: 8%;
+    left: 15%;
+    border-radius: 15%;
+    animation-duration: 1s, 10s, 30s;
+    animation-delay: 0.7s, 1.7s, 0.5s;
+    --ty: 50px;
+}
+
+.shape-4 {
+    width: 40px;
+    height: 40px;
+    top: 55%;
+    left: 5%;
+    animation-duration: 0.6s, 6s, 18s;
+    animation-delay: 1s, 1.6s, 0s;
+    --tx: -50px;
+}
+
+.shape-5 {
+    width: 60px;
+    height: 60px;
+    top: 65%;
+    right: 12%;
+    border-radius: 20%;
+    animation-duration: 0.9s, 9s, 22s;
+    animation-delay: 0.5s, 1.4s, 2s;
+    --ty: 80px;
+}
+
+.shape-6 {
+    width: 120px;
+    height: 60px;
+    top: 8%;
+    right: 25%;
+    animation-duration: 1.2s, 12s, 35s;
+    animation-delay: 0.8s, 2s, 0s;
+    --tx: 100px;
+    --ty: -50px;
+}
+
+.shape-7 {
+    width: 45px;
+    height: 45px;
+    bottom: 12%;
+    right: 8%;
+    animation-duration: 0.7s, 7s, 16s;
+    animation-delay: 0.9s, 1.6s, 1.5s;
+    --tx: 50px;
+}
+
+.shape-8 {
+    width: 90px;
+    height: 90px;
+    top: 35%;
+    left: 15%;
+    animation-duration: 1.1s, 11s, 28s;
+    animation-delay: 0.4s, 1.5s, 0s;
+    --tx: -80px;
+}
+
+.shape-9 {
+    width: 30px;
+    height: 30px;
+    top: 6%;
+    left: 35%;
+    animation-duration: 0.5s, 5s, 12s;
+    animation-delay: 1.2s, 1.7s, 0s;
+    --ty: -40px;
+}
+
+.shape-10 {
+    width: 70px;
+    height: 70px;
+    bottom: 5%;
+    left: 45%;
+    animation-duration: 0.8s, 8s, 20s;
+    animation-delay: 1.1s, 1.9s, 3s;
+    --ty: 60px;
+}
+
+.shape-11 {
+    width: 55px;
+    height: 55px;
+    bottom: 20%;
+    right: 25%;
+    animation-duration: 0.6s, 6s, 14s;
+    animation-delay: 1.3s, 1.9s, 0s;
+    --tx: 70px;
+}
+
+.shape-12 {
+    width: 25px;
+    height: 75px;
+    top: 25%;
+    left: 25%;
+    animation-duration: 0.9s, 9s, 24s;
+    animation-delay: 1.4s, 2.3s, 0s;
+    transform: scale(0) rotate(-45deg);
+}
+
+.shape-13 {
+    width: 85px;
+    height: 85px;
+    top: 35%;
+    right: 35%;
+    animation-duration: 1.3s, 13s, 19s;
+    animation-delay: 0.6s, 1.9s, 1s;
+    transform: scale(0);
+}
+
+.shape-14 {
+    width: 40px;
+    height: 40px;
+    bottom: 50%;
+    right: 5%;
+    animation-duration: 0.7s, 7s, 17s;
+    animation-delay: 1.2s, 1.9s, 0s;
+    transform: scale(0);
+}
+
+
+/* --- 4. Keyframe Animations --- */
+@keyframes spin-and-morph {
+    0% {
+        transform: rotate(0deg);
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        border-radius: 0%;
+    }
+
+    25% {
+        transform: rotate(90deg);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        border-radius: 50%;
+    }
+
+    50% {
+        transform: rotate(180deg);
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        border-radius: 0%;
+    }
+
+    75% {
+        transform: rotate(270deg);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        border-radius: 10%;
+    }
+
+    100% {
+        transform: rotate(360deg);
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        border-radius: 0%;
+    }
+}
+
+@keyframes pulse-text {
+
+    0%,
+    100% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes shape-arrive {
+    from {
+        opacity: 0;
+        transform: scale(0) translate(var(--tx), var(--ty)) rotate(-90deg);
+    }
+
+    to {
+        opacity: 0.5;
+        transform: scale(1) translate(0, 0) rotate(0deg);
+    }
+}
+
+@keyframes floating {
+    from {
+        transform: translateY(0px) scale(1);
+    }
+
+    to {
+        transform: translateY(-25px) scale(1.05);
+    }
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translate(-50%, 0);
+    }
+
+    40% {
+        transform: translate(-50%, -15px);
+    }
+
+    60% {
+        transform: translate(-50%, -7px);
+    }
+}
+
+@keyframes textFloat {
+    from {
+        transform: translateY(0px);
+    }
+
+    to {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* --- 5. Main Content Styling --- */
+#main-content {
+    padding: 80px 20px;
+    background: #f9fafb;
+}
+
+.calculator-section h2 {
+    font-size: 2.5rem;
+    color: #1F2937;
+    margin-bottom: 40px;
+}
+
+/* Tabs (2D/3D Selection) */
+.tabs {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.tab-btn {
+    padding: 12px 25px;
+    font-family: "Exo", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    border: 2px solid #e0e8f3;
+    background-color: #ffffff;
+    color: #4B5563;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    background-color: #f0f4f8;
+    border-color: #b8c5d6;
+}
+
+.tab-btn.active {
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Shape Grid & Cards */
+.shape-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+}
+
+.shape-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e8f3;
+    border-radius: 12px;
+    padding: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shape-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(224, 232, 240, 0.8);
+    border-color: #b8c5d6;
+}
+
+.shape-card img {
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+.shape-card h3 {
+    margin: 0;
+    color: #1F2937;
+    font-size: 1.2rem;
+}
+
+
+/* --- 6. Calculator Panel Styling --- */
+/* General Panel Layout */
+.calculator-panel {
+    display: none;
+    /* Hidden by default, shown via JS */
+    background-color: #ffffff;
+    border: 1px solid #e0e8f3;
+    border-radius: 12px;
+    padding: 30px;
+    margin-top: 40px;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(224, 232, 240, 0.7);
+    animation: fadeIn 0.5s ease;
+}
+
+.calculator-panel h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #1F2937;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+.calculator-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* Info & Calculation Sections */
+.info-section img {
+    max-width: 150px;
+    display: block;
+    margin: 0 auto 20px auto;
+}
+
+.info-section h4,
+.calculation-section h4 {
+    font-size: 1.2rem;
+    color: #1F2937;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #f0f4f8;
+    padding-bottom: 10px;
+}
+
+.info-section p {
+    font-size: 1rem;
+    color: #4B5563;
+}
+
+.info-section code {
+    font-family: "Courier New", Courier, monospace;
+    background-color: #f0f4f8;
+    padding: 3px 6px;
+    border-radius: 4px;
+    color: #3b82f6;
+}
+
+/* Input Fields */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 700;
+    color: #4B5563;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e8f3;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: "Exo", sans-serif;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* Buttons (Calculate, Reset, Back, Choice) */
+.back-btn {
+    background: none;
+    border: none;
+    color: #4B5563;
+    font-family: "Exo", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 20px;
+    padding: 5px;
+    transition: color 0.3s;
+}
+
+.back-btn:hover {
+    color: #3b82f6;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.calc-btn {
+    flex-grow: 1;
+    padding: 15px;
+    font-family: "Exo", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.calc-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+.calc-btn:disabled {
+    background: #9ca3af;
+    /* Warna abu-abu yang netral */
+    opacity: 0.7;
+    cursor: not-allowed;
+    /* Nonaktifkan efek hover saat disabled */
+    transform: none;
+    box-shadow: none;
+}
+
+.reset-btn {
+    flex-basis: 40%;
+    padding: 15px;
+    font-family: "Exo", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: 2px solid #e0e8f3;
+    border-radius: 8px;
+    background: transparent;
+    color: #4B5563;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+    background-color: #f8fafc;
+    border-color: #b8c5d6;
+}
+
+/* New styles for Triangle calculation choice */
+.choice-button-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.choice-btn {
+    flex: 1;
+    padding: 10px 15px;
+    font-family: "Exo", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: 2px solid #e0e8f3;
+    background-color: #ffffff;
+    color: #4B5563;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.choice-btn.active {
+    background-color: #e0e7ff;
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+
+/* Result Display */
+.result-section {
+    display: none;
+    /* Hidden by default, shown via JS */
+    margin-top: 30px;
+    background-color: #f8fafc;
+    border: 1px solid #e0e8f3;
+    border-left: 4px solid #3b82f6;
+    border-radius: 8px;
+    padding: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+.result-section h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.result-section p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: #1F2937;
+}
+
+.result-section p code {
+    font-weight: bold;
+    color: #3b82f6;
+}
+
+
+/* --- 7. Footer Styling --- */
+.site-footer-main {
+    text-align: center;
+    padding: 30px 20px;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+}
+
+.site-footer-main p {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+
+/* --- 8. Responsive Design (Media Queries) --- */
+@media (max-width: 768px) {
+
+    /* Header */
+    .header-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .header-content p {
+        font-size: 1rem;
+    }
+
+    .header-content {
+        animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .scroll-down-btn {
+        width: 50px;
+        height: 50px;
+        bottom: 30px;
+    }
+
+    .scroll-down-btn svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    /* Hide some shapes on mobile for performance */
+    .shape-6,
+    .shape-3,
+    .shape-13 {
+        display: none;
+    }
+
+    .shape-1 {
+        width: 45px;
+        height: 45px;
+        top: 10%;
+        left: 5%;
+    }
+
+    .shape-2 {
+        width: 35px;
+        height: 35px;
+        top: 12%;
+        right: 8%;
+    }
+
+    .shape-4 {
+        width: 30px;
+        height: 30px;
+        top: 40%;
+        left: 10%;
+    }
+
+    .shape-5 {
+        width: 40px;
+        height: 40px;
+        top: 70%;
+        right: 12%;
+    }
+
+    .shape-7 {
+        width: 35px;
+        height: 35px;
+        bottom: 8%;
+        right: 5%;
+    }
+
+    .shape-8 {
+        width: 60px;
+        height: 60px;
+        top: 25%;
+        left: 15%;
+        opacity: 0.3;
+    }
+
+    .shape-9 {
+        width: 20px;
+        height: 20px;
+        top: 5%;
+        left: 45%;
+    }
+
+    .shape-10 {
+        width: 45px;
+        height: 45px;
+        bottom: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .shape-11 {
+        width: 40px;
+        height: 40px;
+        bottom: 15%;
+        left: 10%;
+    }
+
+    .shape-12 {
+        width: 15px;
+        height: 45px;
+        top: 20%;
+        right: 30%;
+    }
+
+    .shape-14 {
+        width: 30px;
+        height: 30px;
+        top: 55%;
+        right: 20%;
+    }
+
+    /* Main Content */
+    .calculator-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .shape-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 15px;
+    }
+
+    .calculator-section h2 {
+        font-size: 2rem;
+    }
+
+    .info-section {
+        order: 1;
+    }
+
+    /* Move info below calculation on mobile */
+    .calculation-section {
+        order: 2;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .reset-btn {
+        flex-basis: auto;
+    }
+
+    /**
+     * Ubah posisi kontainer toast agar berada di tengah secara horizontal
+     * dengan sedikit jarak dari tepi layar.
+     */
+    #toast-container {
+        left: 10px;
+        right: 10px;
+        top: 10px;
+        width: auto;
+        /* Biarkan lebar diatur oleh left/right */
+        align-items: center;
+        /* Pusatkan toast di dalam kontainer */
+    }
+
+    /**
+     * Buat lebar toast menjadi fleksibel.
+     * Hapus `min-width` agar tidak terlalu lebar di layar sempit.
+     */
+    .toast {
+        width: 30%;
+        min-width: 0;
+        max-width: 100px;
+        /* Batas lebar maks, bagus untuk tablet */
+        font-size: 0.9rem;
+        /* Sedikit kecilkan font agar pas */
+    }
+}
+
+/* --- 9. Toast Notification Styling --- */
+
+/**
+ * Kontainer Toast
+ * Posisinya fixed di pojok kanan atas layar untuk menampung
+ * semua notifikasi yang muncul.
+ */
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    /* Pastikan di atas semua elemen lain */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* Jarak antar toast */
+    align-items: flex-end;
+    /* Toast rata ke kanan */
+}
+
+/**
+ * Style Dasar untuk setiap Toast
+ * Mengatur tampilan umum, padding, shadow, dan transisi untuk animasi.
+ */
+.toast {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    color: #fff;
+    font-family: 'Exo', sans-serif;
+    font-size: 0.95rem;
+    min-width: 320px;
+    max-width: 400px;
+    cursor: pointer;
+    border-left: 5px solid transparent;
+    /* Aksen garis di kiri */
+
+    /* State awal (di luar layar) & transisi untuk animasi slide */
+    transform: translateX(120%);
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/**
+ * State 'show'
+ * Saat kelas ini ditambahkan, toast akan meluncur masuk ke dalam layar.
+ */
+.toast.show {
+    transform: translateX(0);
+}
+
+/**
+ * Ikon di dalam Toast
+ * Menggunakan flexbox agar tidak mengecil dan punya jarak yang pas.
+ */
+.toast .toast-icon {
+    flex-shrink: 0;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast .toast-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* --- Variasi Tipe Toast --- */
+
+/**
+ * Toast Success (Hijau)
+ * Untuk notifikasi keberhasilan.
+ */
+.toast.success {
+    background-color: #2D3A31;
+    /* Dark Green */
+    border-left-color: #38C172;
+    /* Bright Green Accent */
+}
+
+/**
+ * Toast Error (Merah)
+ * Untuk notifikasi kesalahan atau validasi.
+ */
+.toast.error {
+    background-color: #3E2C2E;
+    /* Dark Red */
+    border-left-color: #E3342F;
+    /* Bright Red Accent */
+}
+
+/**
+ * Toast Info (Biru)
+ * Untuk notifikasi informasi umum.
+ */
+.toast.info {
+    background-color: #2A3844;
+    /* Dark Blue */
+    border-left-color: #3490DC;
+    /* Bright Blue Accent */
+}
